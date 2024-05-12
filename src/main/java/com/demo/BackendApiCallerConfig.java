@@ -15,8 +15,7 @@ public class BackendApiCallerConfig {
 
 	@Bean
 	public RestTemplate restTemplate() {
-		String baseUrl = env.getProperty("backendService.baseUrl");
-		System.out.println("backendService.baseUrl="+baseUrl);
+		String baseUrl = env.getProperty("backendService.baseUrl");		
 		return new RestTemplateBuilder().rootUri(baseUrl).build();
 	}
 }

@@ -27,13 +27,13 @@ public class BackendServiceCaller {
 
 	@Bulkhead(name = "ApsBackendService")
 	public String callAps() {
-		System.out.println("**************");
+		//System.out.println("**************");
 		String baseUrl = env.getProperty("backendService.baseUrl");
-		System.out.println("backendService.baseUrl=" + baseUrl);
+		//System.out.println("backendService.baseUrl=" + baseUrl);
 		String path = env.getProperty("backendService.path.aps");
-		System.out.println("backendService.path.aps=" + path);
+		//System.out.println("backendService.path.aps=" + path);
 		String s = restTemplate.getForObject(path, String.class);
-		System.out.println(s);
+		//System.out.println(s);
 		return s;
 	}
 
