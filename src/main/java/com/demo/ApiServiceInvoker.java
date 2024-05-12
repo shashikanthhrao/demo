@@ -30,9 +30,9 @@ public class ApiServiceInvoker {
 
 	@Bulkhead(name = "ApsBackendService")
 	public String callAps() throws IOException {
-		Request request = new Request.Builder().url(env.getProperty("apsUrl")).build();
-		Response response = apsClient.newCall(request).execute();
 		System.out.println("Invoking aps: " + env.getProperty("apsUrl"));
+		Request request = new Request.Builder().url(env.getProperty("apsUrl")).build();
+		Response response = apsClient.newCall(request).execute();		
 		String s=response.body().string();
 		System.out.println(s);
 		return s;
