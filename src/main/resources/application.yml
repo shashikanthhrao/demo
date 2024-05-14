@@ -68,6 +68,8 @@ resilience4j.retry:
     default:
       maxAttempts: 3
       waitDuration: 100
+      retry-exceptions:
+        - java.lang.Exception        
   instances:
     AngBackendService:
       baseConfig: default
@@ -109,5 +111,5 @@ logging:
       github: INFO
     okhttp3:  INFO
     com:
-      demo: INFO   
+      demo: WARN   
       

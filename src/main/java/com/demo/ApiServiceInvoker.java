@@ -92,14 +92,14 @@ public class ApiServiceInvoker {
 		return response.body().string();
 	}
 
-	@Retry(name = "AngBackendService", fallbackMethod = "fallbackAfterRetry")
+	@Retry(name = "AngBackendService")
 	public String callAng() throws IOException {
 		Request request = new Request.Builder().url(env.getProperty("angUrl")).build();
 		Response response = angClient.newCall(request).execute();
 		return response.body().string();
 	}
 
-	@Retry(name = "LexisNexisBackendService", fallbackMethod = "fallbackAfterRetry")
+	@Retry(name = "LexisNexisBackendService")
 	@CircuitBreaker(name = "LexisNexisBackendService")
 	@RateLimiter(name = "LexisNexisBackendService")
 	@TimeLimiter(name = "LexisNexisBackendService")
