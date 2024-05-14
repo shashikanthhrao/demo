@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/")
 public class ResilientAppController {
 
+	private final BackendServiceCaller backendServiceCaller;
 	private final ApiServiceInvoker apiServiceInvoker;
+	
 
 	@Autowired
-	public ResilientAppController(BackendServiceCaller externalApi, ApiServiceInvoker apiServiceInvoker) {
+	public ResilientAppController(BackendServiceCaller backendServiceCaller, ApiServiceInvoker apiServiceInvoker) {
+		this.backendServiceCaller=backendServiceCaller;
 		this.apiServiceInvoker = apiServiceInvoker;
 	}
 
 	@GetMapping("bizTrxA")
 	public String bizTrxA() throws IOException {
-		// return externalAPICaller.callAps();
+		//return backendServiceCaller.callAps();
 		return apiServiceInvoker.callAps();
 	}
 

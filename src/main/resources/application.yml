@@ -8,7 +8,6 @@ management:
       exposure:
         include: '*'
 
-
 resilience4j.bulkhead:
   configs:
     default:
@@ -46,7 +45,6 @@ resilience4j.ratelimiter:
     LexisNexisBackendService:
       baseConfig: default
 
-
 resilience4j.circuitbreaker:
   configs:
     default:
@@ -63,8 +61,7 @@ resilience4j.circuitbreaker:
     SimsBackendService:
       baseConfig: default
     LexisNexisBackendService:
-      baseConfig: default
-    
+      baseConfig: default    
 
 resilience4j.retry:
   configs:
@@ -75,17 +72,12 @@ resilience4j.retry:
     AngBackendService:
       baseConfig: default
     LexisNexisBackendService:
-      baseConfig: default
-
-
-      
+      baseConfig: default      
 
 backendService:
-  #baseUrl:  http://localhost:9090
-  baseUrl:  https://google.com
+  baseUrl:  http://localhost:9090  
   path:
-    #aps:  /api/aps
-    aps:  /maps/@37.8109952,-121.339904,14z?entry=ttu
+    aps:  /api/aps    
     ecpr: /api/ecpr
     ews:  /api/ews
     sims: /api/sims
@@ -93,14 +85,29 @@ backendService:
     lexisNexis: /api/lexisNexis
     
 #apsUrl: http://localhost:9090/api/aps
-apsUrl: https://google.com/maps
-ecprUrl: https://google.com/maps
-ewsUrl: https://google.com/maps
-simsUrl: https://google.com/maps
-angUrl: https://google.com/maps
-lexisNexisUrl: https://google.com/maps
-    
-    
-    
+apsUrl: http://localhost:9090/api/aps
+ecprUrl: http://localhost:9090/api/ecpr
+ewsUrl: http://localhost:9090/api/ews
+simsUrl: http://localhost:9090/api/sims
+angUrl: http://localhost:9090/api/ang
+lexisNexisUrl: http://localhost:9090/api/lexisNexis
 
+server:
+  tomcat:
+    accesslog:
+      directory: /dev
+      enabled: true
+      prefix: stdout
+      buffered: false
+      suffix: ""
+      file-date-format: ""
 
+logging:
+  level:
+    root: INFO
+    io:
+      github: INFO
+    okhttp3:  INFO
+    com:
+      demo: INFO   
+      

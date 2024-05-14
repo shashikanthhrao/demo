@@ -37,36 +37,36 @@ public class BackendServiceCaller {
 		return s;
 	}
 
-	@TimeLimiter(name = "EcprBackendService")
+	//@TimeLimiter(name = "EcprBackendService")
 	public CompletableFuture<String> callEcprAsync() {
 		BackendServiceCaller backendServiceCaller = this;
 		return CompletableFuture.supplyAsync(backendServiceCaller::callEcpr);
 
 	}
 
-	@RateLimiter(name = "EwsBackendService")
+	//@RateLimiter(name = "EwsBackendService")
 	public String callEws() {
 		String path = env.getProperty("backendService.path.ews");
 		return restTemplate.getForObject(path, String.class);
 	}
 
-	@CircuitBreaker(name = "SimsBackendService")
+	//@CircuitBreaker(name = "SimsBackendService")
 	public String callSims() {
 		String path = env.getProperty("backendService.path.sims");
 		return restTemplate.getForObject(path, String.class);
 	}
 
-	@Retry(name = "AngBackendService", fallbackMethod = "fallbackAfterRetry")
+	//@Retry(name = "AngBackendService", fallbackMethod = "fallbackAfterRetry")
 	public String callAng() {
 		String path = env.getProperty("backendService.path.ang");
 		return restTemplate.getForObject(path, String.class);
 	}
 
-	@Retry(name = "LexisNexisBackendService", fallbackMethod = "fallbackAfterRetry")
-	@CircuitBreaker(name = "LexisNexisBackendService")
-	@RateLimiter(name = "LexisNexisBackendService")
-	@TimeLimiter(name = "LexisNexisBackendService")
-	@Bulkhead(name = "LexisNexisBackendService")
+	//@Retry(name = "LexisNexisBackendService", fallbackMethod = "fallbackAfterRetry")
+	//@CircuitBreaker(name = "LexisNexisBackendService")
+	//@RateLimiter(name = "LexisNexisBackendService")
+	//@TimeLimiter(name = "LexisNexisBackendService")
+	//@Bulkhead(name = "LexisNexisBackendService")
 	public CompletableFuture<String> callLexisNexisAsync() {
 		BackendServiceCaller backendServiceCaller = this;
 		return CompletableFuture.supplyAsync(backendServiceCaller::callLexisNexis);

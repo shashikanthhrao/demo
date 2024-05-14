@@ -3,6 +3,8 @@ package com.demo;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -18,24 +20,39 @@ import okhttp3.Response;
 
 @Component
 public class ApiServiceInvoker {
-	private final OkHttpClient apsClient = new OkHttpClient();
-	private final OkHttpClient ecprClient = new OkHttpClient();
-	private final OkHttpClient ewsClient = new OkHttpClient();
-	private final OkHttpClient simsClient = new OkHttpClient();
-	private final OkHttpClient angClient = new OkHttpClient();
-	private final OkHttpClient lexisNexisClient = new OkHttpClient();
+
+	Logger logger = LoggerFactory.getLogger(ApiServiceInvoker.class);
+
+	private final OkHttpClient apsClient;
+	private final OkHttpClient ecprClient;
+	private final OkHttpClient ewsClient;
+	private final OkHttpClient simsClient;
+	private final OkHttpClient angClient;
+	private final OkHttpClient lexisNexisClient;
 
 	@Autowired
 	private Environment env;
 
+	@Autowired
+	public ApiServiceInvoker() {
+		apsClient = new OkHttpClient();
+		ecprClient = new OkHttpClient();
+		ewsClient = new OkHttpClient();
+		simsClient = new OkHttpClient();
+		angClient = new OkHttpClient();
+		lexisNexisClient = new OkHttpClient();
+	}
+
 	@Bulkhead(name = "ApsBackendService")
 	public String callAps() throws IOException {
-		System.out.println("Invoking aps: " + env.getProperty("apsUrl"));
+		logger.debug("ApiServiceInvoker making a call to " + env.getProperty("apsUrl"));
 		Request request = new Request.Builder().url(env.getProperty("apsUrl")).build();
-		Response response = apsClient.newCall(request).execute();		
-		String s=response.body().string();
-		System.out.println(s);
-		return s;
+		Response response = apsClient.newCall(request).execute();
+		String responseString = response.body().string();
+		logger.trace("Response Recieved: " + responseString);
+		logger.trace("********************************");
+		return responseString;
+
 	}
 
 	@TimeLimiter(name = "EcprBackendService")
