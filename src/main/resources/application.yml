@@ -111,5 +111,5 @@ logging:
       github: INFO
     okhttp3:  INFO
     com:
-      demo: WARN   
+      demo: INFO   
       
