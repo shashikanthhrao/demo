@@ -18,38 +18,36 @@ public class ResilienceExceptionHandler {
 
 	Logger logger = LoggerFactory.getLogger(ResilienceExceptionHandler.class);
 
-	// bulkhead related exception
+	// Bulkhead Full Exception
 	@ExceptionHandler({ BulkheadFullException.class })
 	@ResponseStatus(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED)
-	public void handleBulkheadFullException() {
-		logger.info("BulkheadFullException Recieved (resilience4J Bulkhead). HTTP Response Status code set to: "
-				+ HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
+	public void handleBulkheadFullException(BulkheadFullException e) {
+		logger.error("BulkheadFullException handled. HTTP Response Status code set to: "
+				+ HttpStatus.BANDWIDTH_LIMIT_EXCEEDED, e);
+
 	}
 
-	// timelimiter related exception
+	// TimeLimiter Exception
 	@ExceptionHandler({ TimeoutException.class })
 	@ResponseStatus(HttpStatus.REQUEST_TIMEOUT)
-	public void handleTimeoutException() {
-		logger.info("TimeoutException Recieved (resilience4J TimeLimiter). HTTP Response Status code set to: "
-				+ HttpStatus.REQUEST_TIMEOUT);
+	public void handleTimeoutException(TimeoutException e) {
+		logger.error("TimeoutException handled. HTTP Response Status code set to: " + HttpStatus.REQUEST_TIMEOUT, e);
 	}
 
-	// ratelimiter related exception
+	// RateLimiter related RequestNotPermitted Exception
 	@ExceptionHandler({ RequestNotPermitted.class })
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
-	public void handleRequestNotPermitted() {
-		logger.info(
-				"RequestNotPermitted exception Recieved (resilience4J RateLimiter) . HTTP Response Status code set to: "
-						+ HttpStatus.TOO_MANY_REQUESTS);
+	public void handleRequestNotPermitted(RequestNotPermitted e) {
+		logger.error("RequestNotPermitted Exception handled. HTTP Response Status code set to: "
+				+ HttpStatus.TOO_MANY_REQUESTS, e);
 	}
 
-	// circuit breaker related exception
+	// CircuitBreaker related CallNotPermittedException
 	@ExceptionHandler({ CallNotPermittedException.class })
 	@ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-	public void handleCallNotPermittedException() {
-		logger.info(
-				"CallNotPermittedException Recieved (resilience4J CircuitBreaker) . HTTP Response Status code set to: "
-						+ HttpStatus.SERVICE_UNAVAILABLE);
+	public void handleCallNotPermittedException(CallNotPermittedException e) {
+		logger.error("CallNotPermittedException handled. HTTP Response Status code set to: "
+				+ HttpStatus.SERVICE_UNAVAILABLE, e);
 	}
 
 }

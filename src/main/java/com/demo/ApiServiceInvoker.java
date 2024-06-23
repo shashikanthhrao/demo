@@ -99,9 +99,9 @@ public class ApiServiceInvoker {
 		return response.body().string();
 	}
 
-	@Retry(name = "LexisNexisBackendService")
+	//@Retry(name = "LexisNexisBackendService")
 	@CircuitBreaker(name = "LexisNexisBackendService")
-	@RateLimiter(name = "LexisNexisBackendService")
+	//@RateLimiter(name = "LexisNexisBackendService")
 	@TimeLimiter(name = "LexisNexisBackendService")
 	@Bulkhead(name = "LexisNexisBackendService")
 	public CompletableFuture<String> callLexisNexisAsync() {
