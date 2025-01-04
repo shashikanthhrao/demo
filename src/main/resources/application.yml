@@ -87,12 +87,20 @@ backendService:
     lexisNexis: /api/lexisNexis
     
 #apsUrl: http://localhost:9090/api/aps
-apsUrl: http://localhost:9090/api/aps
-ecprUrl: http://localhost:9090/api/ecpr
-ewsUrl: http://localhost:9090/api/ews
-simsUrl: http://localhost:9090/api/sims
-angUrl: http://localhost:9090/api/ang
-lexisNexisUrl: http://localhost:9090/api/lexisNexis
+apsUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/aps
+ecprUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/ecpr
+ewsUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/ews
+simsUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/sims
+angUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/ang
+lexisNexisUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/lexisNexis
+
+CAV_APP_AGENT_TIER: resilience4jDemoOcp
+CAV_APP_AGENT_NDCPORT: 443
+CAV_APP_AGENT_NDCHOST: az-tmpe-cav-dcg-t06.wellsfargo.com
+CAV_APP_AGENT_NDC_COMM_PROTOCOL: TCP
+
+
+
 
 server:
   tomcat:
