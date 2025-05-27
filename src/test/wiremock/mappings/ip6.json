@@ -1,0 +1,11 @@
+{
+	"request": {
+		"method": "GET",
+		"url": "/api/ip6"
+	},
+	"response": {
+		"status": 200,
+		"bodyFileName": "../__files/ip6_response.json",
+		"fixedDelayMilliseconds": 1000
+	}
+}
