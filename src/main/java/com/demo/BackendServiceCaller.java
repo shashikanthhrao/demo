@@ -21,61 +21,61 @@ public class BackendServiceCaller {
 		this.restTemplate = restTemplate;
 	}
 
-	@Bulkhead(name = "ApsBackendService")
-	public String callAps() {
-		//System.out.println("**************");
+	@Bulkhead(name = "Ip1BackendService")
+	public String callIp1() {
 		String baseUrl = env.getProperty("backendService.baseUrl");
-		//System.out.println("backendService.baseUrl=" + baseUrl);
-		String path = env.getProperty("backendService.path.aps");
-		//System.out.println("backendService.path.aps=" + path);
+
+		String path = env.getProperty("backendService.path.iP1");
+
 		String s = restTemplate.getForObject(path, String.class);
-		//System.out.println(s);
+		// System.out.println(s);
 		return s;
 	}
 
-	//@TimeLimiter(name = "EcprBackendService")
-	public CompletableFuture<String> callEcprAsync() {
+	// @TimeLimiter(name = "Ip2BackendService")
+	public CompletableFuture<String> callIp2Async() {
 		BackendServiceCaller backendServiceCaller = this;
-		return CompletableFuture.supplyAsync(backendServiceCaller::callEcpr);
+		return CompletableFuture.supplyAsync(backendServiceCaller::callIp2);
 
 	}
 
-	//@RateLimiter(name = "EwsBackendService")
-	public String callEws() {
-		String path = env.getProperty("backendService.path.ews");
+	// @RateLimiter(name = "Ip3BackendService")
+	public String callIp3() {
+		String path = env.getProperty("backendService.path.iP3");
 		return restTemplate.getForObject(path, String.class);
 	}
 
-	//@CircuitBreaker(name = "SimsBackendService")
-	public String callSims() {
-		String path = env.getProperty("backendService.path.sims");
+	// @CircuitBreaker(name = "Ip4BackendService")
+	public String callIp4() {
+		String path = env.getProperty("backendService.path.iP4");
 		return restTemplate.getForObject(path, String.class);
 	}
 
-	//@Retry(name = "AngBackendService", fallbackMethod = "fallbackAfterRetry")
-	public String callAng() {
-		String path = env.getProperty("backendService.path.ang");
+	// @Retry(name = "Ip5BackendService", fallbackMethod = "fallbackAfterRetry")
+	public String callIp5() {
+		String path = env.getProperty("backendService.path.iP5");
 		return restTemplate.getForObject(path, String.class);
 	}
 
-	//@Retry(name = "LexisNexisBackendService", fallbackMethod = "fallbackAfterRetry")
-	//@CircuitBreaker(name = "LexisNexisBackendService")
-	//@RateLimiter(name = "LexisNexisBackendService")
-	//@TimeLimiter(name = "LexisNexisBackendService")
-	//@Bulkhead(name = "LexisNexisBackendService")
-	public CompletableFuture<String> callLexisNexisAsync() {
+	// @Retry(name = "Ip6BackendService", fallbackMethod =
+	// "fallbackAfterRetry")
+	// @CircuitBreaker(name = "Ip6BackendService")
+	// @RateLimiter(name = "Ip6BackendService")
+	// @TimeLimiter(name = "Ip6BackendService")
+	// @Bulkhead(name = "Ip6BackendService")
+	public CompletableFuture<String> callIp6Async() {
 		BackendServiceCaller backendServiceCaller = this;
-		return CompletableFuture.supplyAsync(backendServiceCaller::callLexisNexis);
+		return CompletableFuture.supplyAsync(backendServiceCaller::callIp6);
 
 	}
 
-	public String callEcpr() {
-		String path = env.getProperty("backendService.path.ecpr");
+	public String callIp2() {
+		String path = env.getProperty("backendService.path.iP2");
 		return restTemplate.getForObject(path, String.class);
 	}
 
-	public String callLexisNexis() {
-		String path = env.getProperty("backendService.path.lexisNexis");
+	public String callIp6() {
+		String path = env.getProperty("backendService.path.iP6");
 		return restTemplate.getForObject(path, String.class);
 	}
 

@@ -23,31 +23,31 @@ public class ApiServiceInvoker {
 
 	Logger logger = LoggerFactory.getLogger(ApiServiceInvoker.class);
 
-	private final OkHttpClient apsClient;
-	private final OkHttpClient ecprClient;
-	private final OkHttpClient ewsClient;
-	private final OkHttpClient simsClient;
-	private final OkHttpClient angClient;
-	private final OkHttpClient lexisNexisClient;
+	private final OkHttpClient iP1Client;
+	private final OkHttpClient iP2Client;
+	private final OkHttpClient iP3Client;
+	private final OkHttpClient iP4Client;
+	private final OkHttpClient iP5Client;
+	private final OkHttpClient iP6Client;
 
 	@Autowired
 	private Environment env;
 
 	@Autowired
 	public ApiServiceInvoker() {
-		apsClient = new OkHttpClient();
-		ecprClient = new OkHttpClient();
-		ewsClient = new OkHttpClient();
-		simsClient = new OkHttpClient();
-		angClient = new OkHttpClient();
-		lexisNexisClient = new OkHttpClient();
+		iP1Client = new OkHttpClient();
+		iP2Client = new OkHttpClient();
+		iP3Client = new OkHttpClient();
+		iP4Client = new OkHttpClient();
+		iP5Client = new OkHttpClient();
+		iP6Client = new OkHttpClient();
 	}
 
-	@Bulkhead(name = "ApsBackendService")
-	public String callAps() throws IOException {
-		logger.debug("ApiServiceInvoker making a call to " + env.getProperty("apsUrl"));
-		Request request = new Request.Builder().url(env.getProperty("apsUrl")).build();
-		Response response = apsClient.newCall(request).execute();
+	@Bulkhead(name = "Ip1BackendService")
+	public String callIP1() throws IOException {
+		logger.debug("ApiServiceInvoker making a call to " + env.getProperty("iP1Url"));
+		Request request = new Request.Builder().url(env.getProperty("iP1Url")).build();
+		Response response = iP1Client.newCall(request).execute();
 		String responseString = response.body().string();
 		logger.trace("Response Recieved: " + responseString);
 		logger.trace("********************************");
@@ -55,19 +55,19 @@ public class ApiServiceInvoker {
 
 	}
 
-	@TimeLimiter(name = "EcprBackendService")
-	public CompletableFuture<String> callEcprAsync() {
+	@TimeLimiter(name = "Ip2BackendService")
+	public CompletableFuture<String> callIp2Async() {
 		ApiServiceInvoker apiServiceInvoker = this;
-		return CompletableFuture.supplyAsync(apiServiceInvoker::callEcpr);
+		return CompletableFuture.supplyAsync(apiServiceInvoker::callIP2);
 
 	}
 
-	public String callEcpr() {
-		Request request = new Request.Builder().url(env.getProperty("ecprUrl")).build();
+	public String callIP2() {
+		Request request = new Request.Builder().url(env.getProperty("Ip2Url")).build();
 		Response response = null;
 		String s = null;
 		try {
-			response = ecprClient.newCall(request).execute();
+			response = iP2Client.newCall(request).execute();
 			if (response.isSuccessful()) {
 				s = response.body().string();
 			}
@@ -78,44 +78,45 @@ public class ApiServiceInvoker {
 		return s;
 	}
 
-	@RateLimiter(name = "EwsBackendService")
-	public String callEws() throws IOException {
-		Request request = new Request.Builder().url(env.getProperty("ewsUrl")).build();
-		Response response = ewsClient.newCall(request).execute();
+	@RateLimiter(name = "Ip3BackendService")
+	public String callIP3() throws IOException {
+		Request request = new Request.Builder().url(env.getProperty("Ip3Url")).build();
+		Response response = iP3Client.newCall(request).execute();
 		return response.body().string();
 	}
 
-	@CircuitBreaker(name = "SimsBackendService")
-	public String callSims() throws IOException {
-		Request request = new Request.Builder().url(env.getProperty("simsUrl")).build();
-		Response response = simsClient.newCall(request).execute();
+	@CircuitBreaker(name = "Ip4BackendService")
+	@TimeLimiter(name = "Ip6BackendService")
+	public String callIP4() throws IOException {
+		Request request = new Request.Builder().url(env.getProperty("iP4Url")).build();
+		Response response = iP4Client.newCall(request).execute();
 		return response.body().string();
 	}
 
-	@Retry(name = "AngBackendService")
-	public String callAng() throws IOException {
-		Request request = new Request.Builder().url(env.getProperty("angUrl")).build();
-		Response response = angClient.newCall(request).execute();
+	@Retry(name = "Ip5BackendService")
+	public String callIP5() throws IOException {
+		Request request = new Request.Builder().url(env.getProperty("iP5Url")).build();
+		Response response = iP5Client.newCall(request).execute();
 		return response.body().string();
 	}
 
-	//@Retry(name = "LexisNexisBackendService")
-	@CircuitBreaker(name = "LexisNexisBackendService")
-	//@RateLimiter(name = "LexisNexisBackendService")
-	@TimeLimiter(name = "LexisNexisBackendService")
-	@Bulkhead(name = "LexisNexisBackendService")
-	public CompletableFuture<String> callLexisNexisAsync() {
+	// @Retry(name = "Ip6BackendService")
+	@CircuitBreaker(name = "Ip6BackendService")
+	// @RateLimiter(name = "Ip6BackendService")
+	@TimeLimiter(name = "Ip6BackendService")
+	@Bulkhead(name = "Ip6BackendService")
+	public CompletableFuture<String> callIP6Async() {
 		ApiServiceInvoker apiServiceInvoker = this;
-		return CompletableFuture.supplyAsync(apiServiceInvoker::callLexisNexis);
+		return CompletableFuture.supplyAsync(apiServiceInvoker::callIP6);
 
 	}
 
-	public String callLexisNexis() {
-		Request request = new Request.Builder().url(env.getProperty("lexisNexisUrl")).build();
+	public String callIP6() {
+		Request request = new Request.Builder().url(env.getProperty("iP6Url")).build();
 		Response response = null;
 		String s = null;
 		try {
-			response = lexisNexisClient.newCall(request).execute();
+			response = iP6Client.newCall(request).execute();
 			if (response.isSuccessful()) {
 				s = response.body().string();
 			}

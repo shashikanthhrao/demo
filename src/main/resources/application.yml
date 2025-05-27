@@ -1,4 +1,10 @@
 spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+
+
   application:
     name: demo
     
@@ -7,6 +13,9 @@ management:
     web:
       exposure:
         include: '*'
+  endpoint:    health:      show-details: always
+  security:
+    enabled: false
 
 resilience4j.bulkhead:
   configs:
@@ -14,9 +23,9 @@ resilience4j.bulkhead:
       max-concurrent-calls: 5
       max-wait-duration: 0
   instances:
-    ApsBackendService:
+    Ip1BackendService:
       baseConfig: default
-    LexisNexisBackendService:
+    Ip6BackendService:
       baseConfig: default
 
 resilience4j.timelimiter:
@@ -25,9 +34,9 @@ resilience4j.timelimiter:
       cancelRunningFuture: true
       timeoutDuration: 2000ms
   instances:
-    EcprBackendService:
+    Ip2BackendService:
       baseConfig: default
-    LexisNexisBackendService:
+    Ip6BackendService:
       baseConfig: default
 
 resilience4j.ratelimiter:
@@ -40,27 +49,27 @@ resilience4j.ratelimiter:
       subscribe-for-events: true
       event-consumer-buffer-size: 50
   instances:
-    EwsBackendService:
+    Ip3BackendService:
       baseConfig: default
-    #LexisNexisBackendService:
+    #Ip6BackendService:
       #baseConfig: default
 
 resilience4j.circuitbreaker:
   configs:
     default:
       registerHealthIndicator: true
-      slidingWindowSize: 60
-      minimumNumberOfCalls: 60
-      permittedNumberOfCallsInHalfOpenState: 20
+      slidingWindowSize: 360
+      minimumNumberOfCalls: 360
+      permittedNumberOfCallsInHalfOpenState: 60
       automaticTransitionFromOpenToHalfOpenEnabled: true
       waitDurationInOpenState: 60s
-      failureRateThreshold: 50
-      eventConsumerBufferSize: 50
-      slowCallDurationThreshold: 1900
+      failureRateThreshold: 80
+      eventConsumerBufferSize: 80
+      slowCallDurationThreshold: 2200
   instances:
-    SimsBackendService:
+    Ip4BackendService:
       baseConfig: default
-    LexisNexisBackendService:
+    Ip6BackendService:
       baseConfig: default    
 
 resilience4j.retry:
@@ -71,33 +80,27 @@ resilience4j.retry:
       retry-exceptions:
         - java.lang.Exception        
   instances:
-    AngBackendService:
+    Ip5BackendService:
       baseConfig: default
-    #LexisNexisBackendService:
+    #Ip6BackendService:
       #baseConfig: default      
 
 backendService:
   baseUrl:  http://localhost:9090  
   path:
-    aps:  /api/aps    
-    ecpr: /api/ecpr
-    ews:  /api/ews
-    sims: /api/sims
-    ang:  /api/ang
-    lexisNexis: /api/lexisNexis
+    iP1:  /api/ip1    
+    iP2: /api/ip2
+    iP3:  /api/ip3
+    iP4: /api/ip4
+    iP5:  /api/ip5
+    iP6: /api/ip6
     
-#apsUrl: http://localhost:9090/api/aps
-apsUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/aps
-ecprUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/ecpr
-ewsUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/ews
-simsUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/sims
-angUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/ang
-lexisNexisUrl: https://az-tmpe-cav-dcg-t06.wellsfargo.com:8443/api/lexisNexis
-
-CAV_APP_AGENT_TIER: resilience4jDemoOcp
-CAV_APP_AGENT_NDCPORT: 443
-CAV_APP_AGENT_NDCHOST: az-tmpe-cav-dcg-t06.wellsfargo.com
-CAV_APP_AGENT_NDC_COMM_PROTOCOL: TCP
+iP1Url: http://localhost:9090/api/ip1
+iP2Url: http://localhost:9090/api/ip2
+iP3Url: http://localhost:9090/api/ip3
+iP4Url: http://localhost:9090/api/ip4
+iP5Url: http://localhost:9090/api/ip5
+iP6Url: http://localhost:9090/api/ip6
 
 
 

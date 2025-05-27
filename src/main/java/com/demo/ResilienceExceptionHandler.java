@@ -22,8 +22,8 @@ public class ResilienceExceptionHandler {
 	@ExceptionHandler({ BulkheadFullException.class })
 	@ResponseStatus(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED)
 	public void handleBulkheadFullException(BulkheadFullException e) {
-		logger.error("BulkheadFullException handled. HTTP Response Status code set to: "
-				+ HttpStatus.BANDWIDTH_LIMIT_EXCEEDED, e);
+		//logger.error("BulkheadFullException handled. HTTP Response Status code set to: "+ HttpStatus.BANDWIDTH_LIMIT_EXCEEDED, e);		
+		logger.error("BulkheadFullException handled. HTTP Response Status code set to: "+ HttpStatus.BANDWIDTH_LIMIT_EXCEEDED);
 
 	}
 
@@ -31,7 +31,8 @@ public class ResilienceExceptionHandler {
 	@ExceptionHandler({ TimeoutException.class })
 	@ResponseStatus(HttpStatus.REQUEST_TIMEOUT)
 	public void handleTimeoutException(TimeoutException e) {
-		logger.error("TimeoutException handled. HTTP Response Status code set to: " + HttpStatus.REQUEST_TIMEOUT, e);
+		//logger.error("TimeoutException handled. HTTP Response Status code set to: " + HttpStatus.REQUEST_TIMEOUT, e);
+		logger.error("TimeoutException handled. HTTP Response Status code set to: " + HttpStatus.REQUEST_TIMEOUT);
 	}
 
 	// RateLimiter related RequestNotPermitted Exception

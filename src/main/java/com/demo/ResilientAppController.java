@@ -25,32 +25,32 @@ public class ResilientAppController {
 	@GetMapping("bizTrxA")
 	public String bizTrxA() throws IOException {
 		//return backendServiceCaller.callAps();
-		return apiServiceInvoker.callAps();
+		return apiServiceInvoker.callIP1();
 	}
 
 	@GetMapping("bizTrxB")
 	public CompletableFuture<String> bizTrxB() {
-		return apiServiceInvoker.callEcprAsync();
+		return apiServiceInvoker.callIp2Async();
 	}
 
 	@GetMapping("bizTrxC")
 	public String bizTrxC() throws IOException {
-		return apiServiceInvoker.callEws();
+		return apiServiceInvoker.callIP3();
 	}
 
 	@GetMapping("bizTrxD")
 	public String bizTrxD() throws IOException {
-		return apiServiceInvoker.callSims();
-	}
+		return apiServiceInvoker.callIP4();
+	} 
 
 	@GetMapping("bizTrxE")
 	public String bizTrxE() throws IOException {
-		return apiServiceInvoker.callAng();
+		return apiServiceInvoker.callIP5();
 	}
 
 	@GetMapping("bizTrxF")
 	public CompletableFuture<String> bizTrxF() {
-		return apiServiceInvoker.callLexisNexisAsync();
+		return apiServiceInvoker.callIP6Async();
 	}
 
 }
