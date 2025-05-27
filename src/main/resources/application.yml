@@ -3,11 +3,9 @@ spring:
     admin:
       client:
         url: http://localhost:8080
-
-
   application:
     name: demo
-    
+        
 management:
   endpoints:
     web:
@@ -103,8 +101,6 @@ iP5Url: http://localhost:9090/api/ip5
 iP6Url: http://localhost:9090/api/ip6
 
 
-
-
 server:
   tomcat:
     accesslog:
@@ -123,4 +119,3 @@ logging:
     okhttp3:  INFO
     com:
       demo: INFO   
-      
