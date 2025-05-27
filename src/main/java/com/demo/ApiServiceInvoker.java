@@ -102,7 +102,7 @@ public class ApiServiceInvoker {
 
 	// @Retry(name = "Ip6BackendService")
 	@CircuitBreaker(name = "Ip6BackendService")
-	// @RateLimiter(name = "Ip6BackendService")
+	//@RateLimiter(name = "Ip6BackendService")
 	@TimeLimiter(name = "Ip6BackendService")
 	@Bulkhead(name = "Ip6BackendService")
 	public CompletableFuture<String> callIP6Async() {

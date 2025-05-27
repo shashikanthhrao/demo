@@ -39,16 +39,16 @@ public class ResilienceExceptionHandler {
 	@ExceptionHandler({ RequestNotPermitted.class })
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public void handleRequestNotPermitted(RequestNotPermitted e) {
-		logger.error("RequestNotPermitted Exception handled. HTTP Response Status code set to: "
-				+ HttpStatus.TOO_MANY_REQUESTS, e);
+		//logger.error("RequestNotPermitted Exception handled. HTTP Response Status code set to: "+ HttpStatus.TOO_MANY_REQUESTS, e);
+		logger.error("RequestNotPermitted Exception handled. HTTP Response Status code set to: "+ HttpStatus.TOO_MANY_REQUESTS);
 	}
 
 	// CircuitBreaker related CallNotPermittedException
 	@ExceptionHandler({ CallNotPermittedException.class })
 	@ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
 	public void handleCallNotPermittedException(CallNotPermittedException e) {
-		logger.error("CallNotPermittedException handled. HTTP Response Status code set to: "
-				+ HttpStatus.SERVICE_UNAVAILABLE, e);
+		//logger.error("CallNotPermittedException handled. HTTP Response Status code set to: "+ HttpStatus.SERVICE_UNAVAILABLE, e);
+		logger.error("CallNotPermittedException handled. HTTP Response Status code set to: "+ HttpStatus.SERVICE_UNAVAILABLE);
 	}
 
 }

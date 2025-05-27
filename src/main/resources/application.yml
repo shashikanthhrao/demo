@@ -21,7 +21,7 @@ resilience4j.bulkhead:
   configs:
     default:
       max-concurrent-calls: 5
-      max-wait-duration: 0
+      max-wait-duration: 0s
   instances:
     Ip1BackendService:
       baseConfig: default
@@ -42,17 +42,19 @@ resilience4j.timelimiter:
 resilience4j.ratelimiter:
   configs:
     default:
-      limit-for-period: 4
-      limit-refresh-period: 1s
-      timeout-duration: 0s
-      allow-health-indicator-to-fail: true
+      limit-for-period: 5
+      limit-refresh-period: 1100ms
+      timeout-duration: 5s
+      allow-health-indicator-to-fail: false
       subscribe-for-events: true
-      event-consumer-buffer-size: 50
+      event-consumer-buffer-size: 3600
   instances:
     Ip3BackendService:
       baseConfig: default
-    #Ip6BackendService:
-      #baseConfig: default
+    Ip6BackendService:
+      baseConfig: default
+
+
 
 resilience4j.circuitbreaker:
   configs:
@@ -60,11 +62,11 @@ resilience4j.circuitbreaker:
       registerHealthIndicator: true
       slidingWindowSize: 360
       minimumNumberOfCalls: 360
-      permittedNumberOfCallsInHalfOpenState: 60
+      permittedNumberOfCallsInHalfOpenState: 180
       automaticTransitionFromOpenToHalfOpenEnabled: true
       waitDurationInOpenState: 60s
-      failureRateThreshold: 80
-      eventConsumerBufferSize: 80
+      failureRateThreshold: 30
+      eventConsumerBufferSize: 3600
       slowCallDurationThreshold: 2200
   instances:
     Ip4BackendService:
